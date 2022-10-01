@@ -1,0 +1,25 @@
+server:
+  port: 8088
+
+spring:
+  application:
+    name: easy-trip
+
+
+login:
+  info:
+    clientId: 8835c32278deb2d44aee
+    clientSecret: a9de2fca2b4d9cb378d331864631e31286bdd897
+    redirectUrl: http://z9hjrb.natappfree.cc/api/access/callback
+    state: STATE
+    scope: user
+    accessTokenUrl: https://github.com/login/oauth/access_token
+    authorizeUrl: https://github.com/login/oauth/authorize?client_id=%s&redirect_uri=%s&state=%s
+
+---
+spring:
+  thymeleaf:
+    cache: false
+    prefix: classpath:/templates/
+    suffix: .html
+    mode: HTML
