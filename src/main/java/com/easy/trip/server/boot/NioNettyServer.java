@@ -1,6 +1,6 @@
 package com.easy.trip.server.boot;
 
-import com.easy.trip.server.handler.NettyServerInitializerHandler;
+import com.easy.trip.server.handler.NettyServerInitializer;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelOption;
@@ -35,7 +35,7 @@ public class NioNettyServer {
             serverBootstrap.group(boss, workPool)
                     .option(ChannelOption.SO_BACKLOG, 1024)
                     .channel(NioServerSocketChannel.class)
-                    .childHandler(new NettyServerInitializerHandler())         // 连接到达时会创建一个通道
+                    .childHandler(new NettyServerInitializer())         // 连接到达时会创建一个通道
                     .childOption(ChannelOption.SO_KEEPALIVE, true); // (6)
 
             // Bind and start to accept incoming connections.

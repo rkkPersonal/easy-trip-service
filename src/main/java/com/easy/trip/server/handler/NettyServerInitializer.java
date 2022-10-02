@@ -18,7 +18,7 @@ import org.springframework.stereotype.Component;
 @Component
 @ChannelHandler.Sharable
 @Slf4j
-public class NettyServerInitializerHandler extends ChannelInitializer<SocketChannel> {
+public class NettyServerInitializer extends ChannelInitializer<SocketChannel> {
 
     private static final String PATH = "/ws";
     private static final String PROTOCOL = "/ws";
