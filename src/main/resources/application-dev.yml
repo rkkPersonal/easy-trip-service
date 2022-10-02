@@ -23,3 +23,20 @@ spring:
     prefix: classpath:/templates/
     suffix: .html
     mode: HTML
+---
+spring:
+  redis:
+    host: 47.103.158.95
+    password: steven24
+    port: 6379
+    timeout: 10000
+    #    sentinel:
+    #      master: mymaster
+    #      nodes: 192.168.43.200:6379,192.168.43.200:6380
+    #      password: 123456
+    lettuce:
+      pool:
+        max-wait: -1ms
+        max-idle: 10
+        min-idle: 0
+        max-active: 100
