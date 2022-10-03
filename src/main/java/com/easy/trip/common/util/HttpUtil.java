@@ -44,6 +44,11 @@ public class HttpUtil {
     public <T> ResponseEntity get(String url, HttpHeaders httpHeaders, Class<?> classZ, Map<String, String> map) {
         return restTemplate.exchange(url, HttpMethod.GET, new HttpEntity<>(httpHeaders), classZ, map);
     }
-    
+
+    @Retryable(maxAttempts = 4, include = RestClientException.class, backoff = @Backoff(delay = 2000, multiplier = 2))
+    public <T> ResponseEntity<T> get(String url, HttpHeaders httpHeaders, Class<T> classZ) {
+        return restTemplate.exchange(url, HttpMethod.GET, new HttpEntity<>(httpHeaders), classZ);
+    }
+
 
 }

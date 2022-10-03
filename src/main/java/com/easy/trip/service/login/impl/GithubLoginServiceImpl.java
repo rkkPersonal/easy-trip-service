@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.easy.trip.common.config.AuthorizeProperty;
 import com.easy.trip.common.constant.Constant;
 import com.easy.trip.common.dto.UserDTO;
+import com.easy.trip.common.util.HttpUtil;
 import com.easy.trip.common.vo.LoginVo;
 import com.easy.trip.service.login.AbstractLoginService;
 import org.springframework.http.HttpEntity;
