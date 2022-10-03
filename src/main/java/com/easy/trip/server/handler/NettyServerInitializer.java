@@ -1,5 +1,6 @@
 package com.easy.trip.server.handler;
 
+import com.easy.trip.server.heart.ServerIdleStateTrigger;
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.socket.SocketChannel;
@@ -8,6 +9,7 @@ import io.netty.handler.codec.http.HttpServerCodec;
 import io.netty.handler.codec.http.websocketx.WebSocketServerProtocolHandler;
 import io.netty.handler.codec.serialization.ObjectEncoder;
 import io.netty.handler.stream.ChunkedWriteHandler;
+import io.netty.handler.timeout.IdleStateHandler;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
@@ -28,6 +30,8 @@ public class NettyServerInitializer extends ChannelInitializer<SocketChannel> {
         log.info("收到新连接");
         // 流水线管理通道中的处理程序（Handler），用来处理业务
         // webSocket协议本身是基于http协议的，所以这边也要使用http编解码器
+        ch.pipeline().addLast("idleStateHandler", new IdleStateHandler(5, 0, 0));
+        ch.pipeline().addLast("idleStateTrigger", new ServerIdleStateTrigger());
         ch.pipeline().addLast(new HttpServerCodec());
         ch.pipeline().addLast(new ObjectEncoder());
         // 以块的方式来写的处理器

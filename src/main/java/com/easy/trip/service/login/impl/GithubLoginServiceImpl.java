@@ -10,7 +10,10 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
+import org.springframework.retry.annotation.Backoff;
+import org.springframework.retry.annotation.Retryable;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -56,13 +59,14 @@ public class GithubLoginServiceImpl extends AbstractLoginService {
         System.out.println(userProfile);
     }
 
+    @Retryable(maxAttempts = 4, include = RestClientException.class, backoff = @Backoff(delay = 2000, multiplier = 2))
     @Override
     protected UserDTO getUserProfile(String accessToken) {
         String httpUrl = UriComponentsBuilder.fromUriString("https://api.github.com/user").toUriString();
         HttpHeaders httpHeaders = new HttpHeaders();
-        httpHeaders.add("Authorization", String.format("Bearer %s",accessToken));
+        httpHeaders.add("Authorization", String.format("Bearer %s", accessToken));
         ResponseEntity<String> userProfileResponse = restTemplate.exchange(httpUrl, HttpMethod.GET, new HttpEntity<>(httpHeaders), String.class);
         System.out.println(userProfileResponse.getBody());
-        return JSON.parseObject(userProfileResponse.getBody(),UserDTO.class);
+        return JSON.parseObject(userProfileResponse.getBody(), UserDTO.class);
     }
 }
