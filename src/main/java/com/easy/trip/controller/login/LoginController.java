@@ -2,6 +2,7 @@ package com.easy.trip.controller.login;
 
 import com.easy.trip.common.config.AuthorizeProperty;
 import com.easy.trip.common.constant.Constant;
+import com.easy.trip.common.exception.LoginException;
 import com.easy.trip.common.util.Parameter;
 import com.easy.trip.common.vo.LoginVo;
 import com.easy.trip.service.login.AbstractLoginService;
@@ -41,11 +42,15 @@ public class LoginController {
      * http://localhost:8089/api/access/callback?code=67fc8f34bf11e82c60b6&state=STATE
      */
     @GetMapping("/access/callback")
-    @ResponseBody
-    public void getAuthorizeCode(@RequestParam("code") String code, @RequestParam("state") String state) {
-        AbstractLoginService loginService = loginServiceMap.get(Constant.Login.GITHUB);
-        loginService.login(LoginVo.builder().code(code).state(state).build());
 
+    public String getAuthorizeCode(@RequestParam("code") String code, @RequestParam("state") String state) {
+        try {
+            AbstractLoginService loginService = loginServiceMap.get(Constant.Login.GITHUB);
+            loginService.login(LoginVo.builder().code(code).state(state).build());
+        } catch (Exception e) {
+            throw new LoginException("login faild");
+        }
+        return "redirect:"+"";
     }
 
     @RequestMapping("/order/page")

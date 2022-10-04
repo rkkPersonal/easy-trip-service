@@ -70,8 +70,8 @@ public class TcpClient {
         };
     }
 
-    public static void main(String[] args) {
+/*    public static void main(String[] args) {
         TcpClient tcpClient = new TcpClient("localhost", 2222);
         tcpClient.connect();
-    }
+    }*/
 }

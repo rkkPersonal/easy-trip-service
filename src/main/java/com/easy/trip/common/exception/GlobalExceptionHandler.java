@@ -20,4 +20,10 @@ public class GlobalExceptionHandler {
         log.error("system internal error :{}", e);
         return ResultDTO.failure("System internal error ,Please contact admin ...");
     }
+
+    @ExceptionHandler(LoginException.class)
+    public String loginFailed(Exception e) {
+        log.error("system internal error :{}", e);
+        return "redirect:"+"https://my.kalacloud.com/apps/mzsfyzhwhm/published";
+    }
 }

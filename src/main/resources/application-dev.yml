@@ -10,7 +10,7 @@ login:
   info:
     clientId: 8835c32278deb2d44aee
     clientSecret: a9de2fca2b4d9cb378d331864631e31286bdd897
-    redirectUrl: http://z9hjrb.natappfree.cc/api/access/callback
+    redirectUrl: http://9s5n77.natappfree.cc/api/access/callback
     state: STATE
     scope: user
     accessTokenUrl: https://github.com/login/oauth/access_token

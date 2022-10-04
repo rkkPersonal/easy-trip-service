@@ -46,8 +46,8 @@ public class AlipayService extends AbstractPayService {
         //构造client
         AlipayClient alipayClient = new DefaultAlipayClient(alipayConfig);
         AlipayTradePagePayRequest alipayRequest = new AlipayTradePagePayRequest(); //创建API对应的request
-        alipayRequest.setReturnUrl("http://z9hjrb.natappfree.cc/api/order/page");
-        alipayRequest.setNotifyUrl("http://z9hjrb.natappfree.cc/api/notify/alipay"); //在公共参数中设置回跳和通知地址
+        alipayRequest.setReturnUrl("http://9s5n77.natappfree.cc/api/order/page");
+        alipayRequest.setNotifyUrl("http://9s5n77.natappfree.cc/api/notify/alipay"); //在公共参数中设置回跳和通知地址
        /* alipayRequest.setBizContent("{" +
                 "    \"out_trade_no\":\"20150320010101001\"," +
                 "    \"product_code\":\"FAST_INSTANT_TRADE_PAY\"," +
