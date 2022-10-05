@@ -9,7 +9,12 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.annotation.Resource;
+import javax.imageio.ImageIO;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.UnsupportedEncodingException;
+import java.util.UUID;
 
 @SpringBootTest(classes = EasyTripApplication.class)
 @RunWith(value = SpringRunner.class)
@@ -46,6 +51,40 @@ class EasyTripApplicationTests {
 
             return null;
         });
+    }
+
+
+    /* 截屏screenshot
+     * 参数：图片存放的位置
+     * 返回： 生成图片生成的路径，图片格式是png，也可以根据自己的需要进行修改
+     */
+    public static String screenShot(String fileName) {
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        Rectangle screenRectangle = new Rectangle(screenSize);
+        String randomName = UUID.randomUUID().toString().replace("-", "");
+        String name = randomName + ".png";
+        // 截图保存的路径
+        File screenFile = new File(fileName);
+        Robot robot;
+        String path = "";
+        boolean b = false;
+        try {
+            robot = new Robot();
+            BufferedImage image = robot.createScreenCapture(screenRectangle);
+            File f = new File(screenFile, name);
+            b = ImageIO.write(image, "png", f);
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        if(b){
+            path = fileName + File.separator +name;
+        }
+        return path;
+    }
+
+    public static void main(String[] args) {
+        screenShot("D:\\dev\\JavaStudy\\easy-trip-service\\easy-trip-service");
     }
 
 
